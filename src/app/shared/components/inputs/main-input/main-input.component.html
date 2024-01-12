@@ -1,0 +1,5 @@
+<div class="col-md-12 text-left my-3">
+    <label class="form-label ">{{label}}</label>
+    <input [(ngModel)]="value" [type]="type" (keyup)="changeValue($event)" class="form-control"
+        [placeholder]="placeholder">
+</div>
