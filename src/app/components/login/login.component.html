@@ -1,22 +1,31 @@
-<div class="d-flex justify-content-center align-items-center" style="height: 100vh">
-    <div class="login-card col-md-4 p-5 rounded-3">
-        <h3 class="title">Faça o login aqui</h3>
+<form action="" [formGroup]="loginForm">
+    <div class="view-login">
+        <div class="image-container">
+            <img src="../../../assets/public/challenge-picpay.jpg" alt="mulher fazendo pagamento">
+        </div>
 
-        <form action="" [formGroup]="loginForm">
-            <div class="row d-flex flex-column">
-                <div class="col-12">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="title">
+                    <h3>faça o login aqui</h3>
+                </div>
+
+                <div class="login-body">
                     <app-main-input formControlName="username" label="email"
                         placeholder="digite seu e-mail"></app-main-input>
 
-                    <app-main-input formControlName="password" type="password" label="senha"
+                    <app-main-input formControlName="password" type="password" label="senha" [showContent]="true"
                         placeholder="digite sua senha"></app-main-input>
                 </div>
-            </div>
-        </form>
-        <div class="row mt-3 d- flex justify-content-end">
-            <div class="col-6">
-                <button class="secondary-button" (click)="login()">Entrar</button>
+
+                <div class="footer-login">
+                    <div>
+                        <button [disabled]="loginForm.invalid" class="secondary-button"
+                            (click)="login()">entrar</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-</div>
+</form>

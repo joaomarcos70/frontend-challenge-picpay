@@ -1,19 +1,37 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, find, from, map, merge, mergeAll } from 'rxjs';
+import { IUser } from 'src/app/shared/interfaces/user/user.interface';
+import { Router } from '@angular/router';
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-}
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  login(username: string, password: string): Observable<any> {
-    console.log(username, password);
-    return this.http.get<any>(`http://localhost:3030/account`);
+  login(username: string, password: string) {
+    this.http
+      .get<IUser[]>(`http://localhost:3030/account`)
+      .pipe(
+        map((users) => from(users)),
+        mergeAll(),
+        find((user) => user.email === username && user.password === password)
+      )
+      .subscribe({
+        next: (user) => {
+          if (user) {
+            localStorage.setItem(
+              'loggedUser',
+              JSON.stringify({ email: user.email, name: user.name })
+            );
+            this.router.navigate(['/home']);
+          } else {
+            alert('User not found');
+          }
+        },
+
+        error: () => {
+          alert('Error');
+        },
+      });
   }
 }

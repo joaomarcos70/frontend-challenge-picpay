@@ -2,6 +2,8 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,200&display=swap');
 @import './assets/styles/mixins/button.mixin.scss';
+@import 'node_modules/bootstrap-icons/font/bootstrap-icons.css';
+
 
 html {
     box-sizing: border-box;
@@ -41,10 +43,11 @@ table {
     border-spacing: 0;
 }
 
-h3.title{
-  color: $primary-text-color;
-  font-weight: 500;
-  font-size: 24px;
+.title h3{
+  font-size: 30px;
+  font-weight: 700;
+  color: $dark-color;
+  margin-bottom: 32px;
 }
 
 .primary-button{
@@ -53,6 +56,10 @@ h3.title{
 .secondary-button{
   @include button(
     $primary-text-color,
-    $primary-color, solid 2px #ffffff,
-    $primary-color, $primary-text-color, solid 2px $primary-color);
+    $primary-color,
+    solid 1px #ffffff,
+    $primary-color,
+    $primary-text-color,
+    solid 2px $primary-color
+);
 }

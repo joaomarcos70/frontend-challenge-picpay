@@ -18,8 +18,9 @@ export class LoginComponent {
   }
 
   login() {
-    this.authService
-      .login(this.loginForm.value.username, this.loginForm.value.password)
-      .subscribe((res) => console.log(res));
+    this.authService.login(
+      this.loginForm.value.username,
+      this.loginForm.value.password
+    );
   }
 }

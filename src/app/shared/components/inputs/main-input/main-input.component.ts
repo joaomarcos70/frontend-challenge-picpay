@@ -20,10 +20,17 @@ export class MainInputComponent implements ControlValueAccessor {
   @Input() label = '';
   @Input() disabled = false;
   @Input() readonly = false;
+  @Input() showContent = false;
 
   value: string = '';
+  showText = false;
   onChange: any = () => {};
   onTouched: any = () => {};
+
+  onHideShowText(): void {
+    this.showText = !this.showText;
+    this.type = this.showText ? 'text' : 'password';
+  }
 
   changeValue(event: any): void {
     this.onChange(event.target.value);

@@ -1,5 +1,20 @@
-<div class="col-md-12 text-left my-3">
+<div class="main-input-container">
     <label class="form-label ">{{label}}</label>
-    <input [(ngModel)]="value" [type]="type" (keyup)="changeValue($event)" class="form-control"
-        [placeholder]="placeholder">
+
+    <div *ngIf="!showContent; else showContentContainer">
+        <input [(ngModel)]="value" [type]="type" (keyup)="changeValue($event)" class="form-control"
+            [placeholder]="placeholder">
+    </div>
+
+    <ng-template class="shoq-content-container" #showContentContainer>
+        <div class="input-container-icon">
+            <input [(ngModel)]="value" [type]="type" (keyup)="changeValue($event)" class="form-control"
+                [placeholder]="placeholder">
+            <span (click)="onHideShowText()">
+                <i *ngIf="!showText" class="bi bi-eye"></i>
+                <i *ngIf="showText" class="bi bi-eye-slash"></i>
+            </span>
+
+        </div>
+    </ng-template>
 </div>

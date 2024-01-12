@@ -1,7 +1,38 @@
 @import '../../../assets/styles/colors.scss';
 
-.login-card {
-    background-color: $primary-color;
-    //border-radius: 8px;
-}
+.view-login{
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
 
+    .login-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        padding: 80px;
+        
+        .login-card {
+            width: 100%;
+        }
+
+        @media screen and (max-width: 842px) {
+            width: 100%;
+        }
+    }
+    
+    .image-container{
+        width: 50%;
+        position: relative;
+        img{
+            object-fit: cover;
+            position: absolute;
+            height: 100%;
+        }
+
+        @media screen and (max-width: 842px) {
+            display: none;
+        }
+    }
+
+}
