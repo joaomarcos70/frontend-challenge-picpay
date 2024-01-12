@@ -1,0 +1,16 @@
+<nav class="nav-container" *ngIf="showNavBar">
+    <div class="nav-content">
+        <div class="nav-logo">
+            <img src="../../../../assets/public/logo-challenge-picpay.png" alt="logo picpay">
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#">início</a></li>
+            <li><a href="#">início</a></li>
+            <li><a href="#">início</a></li>
+        </ul>
+
+        <div [ngClass]="{'avatar-loading':isLoading, 'avatar': !isLoading}">
+            <img src="https://robohash.org/quasetqui.png?size=150x150&set=set1" alt="">
+        </div>
+    </div>
+</nav>
