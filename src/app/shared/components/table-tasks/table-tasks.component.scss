@@ -1,0 +1,52 @@
+@import '../../../../assets/styles/colors.scss';
+
+.header-actions{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.table-responsive {
+    border: solid 1px $soft-color;
+    border-radius: 8px;
+    overflow-y: auto;
+    max-height: 580px;
+
+    table {
+        margin: 0;
+
+        thead {
+            vertical-align: middle;
+            height: 74px;
+            th {
+                padding: 0px 32px;
+                font-size: 16px;
+                font-weight: 600;
+                color: $dark-color;
+
+                &:hover:not(.actions) {
+                    cursor: pointer;
+                    background-color: darken($soft-color, 5%);
+                }
+            }
+        }
+    }
+
+    tbody {
+        vertical-align: middle;
+        td{
+            padding: 0px 32px;
+        }
+        tr{
+            height: 74px;
+        }
+        tr:not(:last-child) {
+            border-bottom: 1px solid $soft-color !important;
+        }
+    }
+}
+
+.badge.text-bg-success{
+    background-color: #238662 !important;
+}

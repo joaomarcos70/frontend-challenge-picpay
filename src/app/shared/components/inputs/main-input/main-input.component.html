@@ -1,5 +1,5 @@
 <div class="main-input-container">
-    <label class="form-label ">{{label}}</label>
+    <label *ngIf="label != ''" class="form-label ">{{label}}</label>
 
     <div *ngIf="!showContent; else showContentContainer">
         <input [(ngModel)]="value" [type]="type" (keyup)="changeValue($event)" class="form-control"

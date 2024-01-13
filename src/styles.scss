@@ -38,6 +38,20 @@ ol, ul {
     list-style: none;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #adabab; 
+  border-radius: 6px;
+}
+
+/* Estiliza o handle da barra de rolagem ao passar o mouse */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -50,16 +64,36 @@ table {
   margin-bottom: 32px;
 }
 
+.layout{
+  padding: 32px;
+
+}
+
+/* @mixin button(
+  $color,
+  $background,
+  $border,
+  $hover-color,
+  $hover-background,
+  $hover-border,
+) { */
+
 .primary-button{
-  @include button($primary-text-color, $primary-color, 0, none, none, 0);
+  @include button(
+    $primary-text-color,
+    $primary-color,
+    1px solid $primary-color,
+    $primary-text-color,
+    $primary-color,
+    1px solid $primary-color);
 }
 .secondary-button{
   @include button(
     $primary-text-color,
     $primary-color,
-    solid 1px #ffffff,
+    solid 1px $primary-color,
     $primary-color,
     $primary-text-color,
-    solid 2px $primary-color
+    solid 1px $primary-color
 );
 }

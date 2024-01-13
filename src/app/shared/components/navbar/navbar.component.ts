@@ -7,7 +7,7 @@ import { NavigationStateService } from 'src/app/states/navigation-state.service'
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  isLoading = true;
+  isLoading = false;
   showNavBar = false;
   constructor(private navigationStateService: NavigationStateService) {}
 

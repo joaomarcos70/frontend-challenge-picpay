@@ -9,6 +9,7 @@ import { AuthService } from './services/auth/auth.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { UserService } from './services/user.service';
+import { TaskService } from './services/task.service';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, HomeComponent],
@@ -20,7 +21,7 @@ import { UserService } from './services/user.service';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [AuthService, UserService],
+  providers: [AuthService, UserService, TaskService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

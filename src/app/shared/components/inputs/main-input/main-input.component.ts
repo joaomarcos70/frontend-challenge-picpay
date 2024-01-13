@@ -1,4 +1,10 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  forwardRef,
+} from '@angular/core';
 import { inputType } from './interfaces/main-input.interface';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -17,10 +23,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class MainInputComponent implements ControlValueAccessor {
   @Input() type: inputType = 'text';
   @Input() placeholder = '';
-  @Input() label = '';
+  @Input() label? = '';
   @Input() disabled = false;
   @Input() readonly = false;
   @Input() showContent = false;
+
+  @Output() keyUp = new EventEmitter<KeyboardEvent>();
 
   value: string = '';
   showText = false;
@@ -30,6 +38,10 @@ export class MainInputComponent implements ControlValueAccessor {
   onHideShowText(): void {
     this.showText = !this.showText;
     this.type = this.showText ? 'text' : 'password';
+  }
+
+  onKeyUp(event: KeyboardEvent): void {
+    this.keyUp.emit(event);
   }
 
   changeValue(event: any): void {

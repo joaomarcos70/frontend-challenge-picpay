@@ -1,0 +1,43 @@
+<div class="row header-actions">
+    <div class="col-md-4">
+        <app-main-input (keyup)="search($event)" placeholder="busque aqui..."></app-main-input>
+    </div>
+    <div class="col-md-4">
+        <button class="primary-button" (click)="add()">Add</button>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">nome</th>
+                <th scope="col">título</th>
+                <th scope="col">data</th>
+                <th scope="col">valor</th>
+                <th scope="col">status</th>
+                <th class="actions"></th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of tasks; index as i">
+                <td>{{task.username}}</td>
+                <td>{{task.title}}</td>
+                <td>{{task.date}}</td>
+                <td>{{task.value}}</td>
+                <td>
+                    <span *ngIf="task.isPayed" class="badge text-bg-success">pago</span>
+                    <span *ngIf="!task.isPayed"><span class="badge text-bg-danger">em aberto</span>
+                    </span>
+                </td>
+                <td>
+                    <button class="btn btn-primary" (click)="edit(task)">Edit</button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" (click)="remove(task)">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
