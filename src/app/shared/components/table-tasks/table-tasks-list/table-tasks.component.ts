@@ -4,6 +4,9 @@ import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { TaskService } from 'src/app/services/task.service';
 import { ITask } from '../interfaces/task.interface';
 
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { TableTasksEditComponent } from '../table-tasks-edit/table-tasks-edit.component';
+
 @Component({
   selector: 'app-table-tasks',
   templateUrl: './table-tasks.component.html',
@@ -12,7 +15,7 @@ import { ITask } from '../interfaces/task.interface';
 export class TableTasksComponent implements OnInit {
   tasks: ITask[] = [];
   searchSubject = new Subject<string>();
-
+  bsModalRef?: BsModalRef;
   filterForm: FormGroup = new FormGroup({
     name: new FormControl(''),
   });
@@ -27,7 +30,10 @@ export class TableTasksComponent implements OnInit {
 
   totalPagesArray: number[] = [];
 
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private modalService: BsModalService
+  ) {}
 
   ngOnInit() {
     this.filter();
@@ -101,7 +107,23 @@ export class TableTasksComponent implements OnInit {
   }
 
   edit(task: ITask) {
-    console.log('edit');
+    const initialState: ModalOptions = {
+      initialState: {
+        list: [
+          'Open a modal with component',
+          'Pass your data',
+          'Do something else',
+          '...',
+        ],
+        title: 'Modal with component',
+      },
+    };
+
+    this.bsModalRef = this.modalService.show(
+      TableTasksEditComponent,
+      initialState
+    );
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   remove(task: ITask) {

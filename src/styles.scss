@@ -57,9 +57,9 @@ html {
   }
   
   body, h1, h2, h3, h4, h5, h6, p, ol, ul {
-    margin: 0;
-    padding: 0;
-    font-weight: normal;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-weight: normal ;
   }
   
   ol, ul {
@@ -76,7 +76,7 @@ ol, ul {
 }
 
 .badge{
-    font-weight: 400;
+    font-weight: 400 !important;
 }
 
 .badge.text-bg-success{
@@ -100,7 +100,7 @@ ol, ul {
 }
 
 .mat-mdc-paginator-container {
-  justify-content: space-between !important; /* ou o valor desejado */
+  justify-content: space-between !important;
 }
 
 ::-webkit-scrollbar {
@@ -112,7 +112,6 @@ ol, ul {
   border-radius: 6px;
 }
 
-/* Estiliza o handle da barra de rolagem ao passar o mouse */
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
@@ -126,7 +125,6 @@ table {
   font-size: 28px;
   font-weight: 700;
   color: $dark-color;
-  //margin-bottom: 32px;
 }
 
 .layout{
@@ -165,3 +163,9 @@ table {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Importing Bootstrap SCSS file. */
+@import "./node_modules/bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";

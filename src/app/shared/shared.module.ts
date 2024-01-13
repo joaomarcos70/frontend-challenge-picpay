@@ -10,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TableTasksEditComponent } from './components/table-tasks/table-tasks-edit/table-tasks-edit.component';
 import { TableTasksComponent } from './components/table-tasks/table-tasks-list/table-tasks.component';
 import { MatPaginatorIntlPtBr } from './utils/paginator-intl.util.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [
     MainInputComponent,
@@ -24,6 +25,9 @@ import { MatPaginatorIntlPtBr } from './utils/paginator-intl.util.service';
     TableTasksComponent,
     TableTasksEditComponent,
   ],
-  providers: [{ provide: MatPaginatorIntl, useClass: MatPaginatorIntlPtBr }],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: MatPaginatorIntlPtBr },
+    BsModalService,
+  ],
 })
 export class SharedModule {}
