@@ -4,21 +4,18 @@ import {
   IResponseTask,
   ITask,
 } from '../shared/components/table-tasks/interfaces/task.interface';
-import { Observable } from 'rxjs';
+import { Observable, filter } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
   constructor(private http: HttpClient) {}
 
-  getTasks(pageSize: number): Observable<IResponseTask> {
-    return this.http.get<IResponseTask>(
-      `http://localhost:3030/tasks?_page=${pageSize}`
-    );
-  }
-
-  searchTask(search: string): Observable<IResponseTask> {
-    return this.http.get<IResponseTask>(
-      `http://localhost:3030/tasks?name=${search}`
-    );
+  getTasks(filters: ITask, page: number, pageSize: number): Observable<any> {
+    console.log(page, pageSize);
+    let params = new HttpParams();
+    params = params.append('name', filters.name);
+    params = params.append('_page', page);
+    params = params.append('_per_page', pageSize);
+    return this.http.get<any>(`http://localhost:3030/tasks`, { params });
   }
 }

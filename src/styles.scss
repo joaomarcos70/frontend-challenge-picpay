@@ -1,9 +1,47 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$frontend-challenge-primary: mat.define-palette(mat.$indigo-palette);
+$frontend-challenge-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$frontend-challenge-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$frontend-challenge-theme: mat.define-light-theme((
+  color: (
+    primary: $frontend-challenge-primary,
+    accent: $frontend-challenge-accent,
+    warn: $frontend-challenge-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($frontend-challenge-theme);
+
 @import './assets/styles/colors.scss';
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,200&display=swap');
 @import './assets/styles/mixins/button.mixin.scss';
 @import 'node_modules/bootstrap-icons/font/bootstrap-icons.css';
 
+*{
+  font-family: 'Poppins', sans-serif;
+}
 
 html {
     box-sizing: border-box;
@@ -18,11 +56,10 @@ html {
     background-color: $main-bg-color;
   }
   
-  body, h1, h2, h4, h5, h6, p, ol, ul {
+  body, h1, h2, h3, h4, h5, h6, p, ol, ul {
     margin: 0;
     padding: 0;
     font-weight: normal;
-    font-family: 'Poppins', sans-serif;
   }
   
   ol, ul {
@@ -36,6 +73,34 @@ html {
 
 ol, ul {
     list-style: none;
+}
+
+.badge{
+    font-weight: 400;
+}
+
+.badge.text-bg-success{
+    background-color: #238662 !important;
+}
+
+.touched-area{
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  border-radius: 4px;
+  justify-content: center;
+  border: solid 1px $soft-color;
+  align-items: center;
+}
+
+.mat-mdc-paginator {
+  font-family: 'Poppins', sans-serif !important;
+  background-color: transparent !important;
+}
+
+.mat-mdc-paginator-container {
+  justify-content: space-between !important; /* ou o valor desejado */
 }
 
 ::-webkit-scrollbar {
@@ -58,10 +123,10 @@ table {
 }
 
 .title h3{
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 700;
   color: $dark-color;
-  margin-bottom: 32px;
+  //margin-bottom: 32px;
 }
 
 .layout{
@@ -97,3 +162,6 @@ table {
     solid 1px $primary-color
 );
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

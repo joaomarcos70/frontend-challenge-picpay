@@ -1,9 +1,14 @@
 <div class="row header-actions">
-    <div class="col-md-4">
-        <app-main-input (keyup)="search($event)" placeholder="busque aqui..."></app-main-input>
+    <div class="col-md-6">
+        <div class="title">
+            <h3>agenda de pagamentos</h3>
+        </div>
     </div>
-    <div class="col-md-4">
-        <button class="primary-button" (click)="add()">Add</button>
+    <div class="col-md-4" [formGroup]="filterForm">
+        <app-main-input (keyup)="search($event)" formControlName="name" placeholder="buscar pelo nome"></app-main-input>
+    </div>
+    <div class="col-md-2">
+        <button class="primary-button" (click)="add()">adicionar</button>
     </div>
 </div>
 
@@ -22,22 +27,32 @@
         </thead>
         <tbody>
             <tr *ngFor="let task of tasks; index as i">
-                <td>{{task.username}}</td>
+                <td>{{task.name}}</td>
                 <td>{{task.title}}</td>
-                <td>{{task.date}}</td>
-                <td>{{task.value}}</td>
+                <td>{{task.date | date: 'dd/MM/yyyy'}}</td>
+                <td>{{task.value | currency:'BRL'}}</td>
                 <td>
                     <span *ngIf="task.isPayed" class="badge text-bg-success">pago</span>
                     <span *ngIf="!task.isPayed"><span class="badge text-bg-danger">em aberto</span>
                     </span>
                 </td>
                 <td>
-                    <button class="btn btn-primary" (click)="edit(task)">Edit</button>
+                    <span class="touched-area" (click)="edit(task)">
+                        <i class="bi bi-pencil"></i>
+                    </span>
                 </td>
                 <td>
-                    <button class="btn btn-danger" (click)="remove(task)">Remove</button>
+                    <span class="touched-area" (click)="remove(task)">
+                        <i class="bi bi-trash3"></i>
+                    </span>
                 </td>
             </tr>
         </tbody>
     </table>
+</div>
+
+<div class="footer-table">
+    <mat-paginator (page)="handlePageEvent($event)" [length]="total" [pageSize]="pageSize" [showFirstLastButtons]="true"
+        [pageSizeOptions]="[10, 20, 50, 100]" aria-label="paginação">
+    </mat-paginator>
 </div>

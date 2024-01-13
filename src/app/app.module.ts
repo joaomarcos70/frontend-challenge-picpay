@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +10,11 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { UserService } from './services/user.service';
 import { TaskService } from './services/task.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
+registerLocaleData(localePt);
 @NgModule({
   declarations: [AppComponent, LoginComponent, HomeComponent],
   imports: [
@@ -20,8 +24,14 @@ import { TaskService } from './services/task.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
-  providers: [AuthService, UserService, TaskService],
+  providers: [
+    AuthService,
+    UserService,
+    TaskService,
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
