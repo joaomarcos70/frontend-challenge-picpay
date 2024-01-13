@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ITask } from './interfaces/task.interface';
-import { TaskService } from 'src/app/services/task.service';
-import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { TaskService } from 'src/app/services/task.service';
+import { ITask } from '../interfaces/task.interface';
 
 @Component({
   selector: 'app-table-tasks',
