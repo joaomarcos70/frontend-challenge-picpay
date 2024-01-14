@@ -1,29 +1,74 @@
 <app-confirm-modal title="modal de confirmação" message="tem certeza que deseja deletar o pagamento"
     [show]="showConfirmModal" (cancel)="closeConfirmModal()" (confirm)="remove($event)"></app-confirm-modal>
 
-<div class="row header-actions">
-    <div class="col-md-6">
-        <div class="title">
-            <h3>agenda de pagamentos</h3>
+
+<div class="header-actions">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="title">
+                <h3>agenda de pagamentos</h3>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="button-container">
+                <button class="primary-button" (click)="add()">adicionar</button>
+            </div>
         </div>
     </div>
-    <div class="col-md-4" [formGroup]="filterForm">
-        <app-main-input (keyup)="search($event)" formControlName="name" placeholder="buscar pelo nome"></app-main-input>
-    </div>
-    <div class="col-md-2">
-        <button class="primary-button" (click)="add()">adicionar</button>
-    </div>
+
+    <form [formGroup]="filterForm">
+        <div class="row mt-6">
+            <div class="col-md-4">
+                <app-main-input (keyup)=" search($event)" formControlName="name" placeholder="buscar pelo nome">
+                </app-main-input>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-3">
+                        <select formControlName="isPayed" (change)="filterGroup()"
+                            class="form-select form-select-lg mb-3" aria-label="seletor de status pagamento">
+                            <option value="null">status</option>
+                            <option value="true">pago</option>
+                            <option value="false">em aberto</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
 </div>
 
 <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">nome</th>
-                <th scope="col">título</th>
-                <th scope="col">data</th>
-                <th scope="col">valor</th>
-                <th scope="col">status</th>
+                <th scope="col" (click)="handleFilter('name')">
+                    <div>
+                        <span class="text-head">nome</span>
+                        <i class="bi bi-arrow-down-up"></i>
+                    </div>
+                </th>
+                <th scope="col" (click)="handleFilter('title')">
+                    <div>
+                        <span text-head>título</span>
+                        <i class="bi bi-arrow-down-up"></i>
+                    </div>
+                </th>
+                <th scope="col" (click)="handleFilter('date')">
+                    <div>
+                        <span class="text-head">data</span>
+                        <i class="bi bi-arrow-down-up"></i>
+                    </div>
+                </th>
+                <th scope="col" (click)="handleFilter('value')">
+                    <div>
+                        <span class="text-head">valor</span>
+                        <i class="bi bi-arrow-down-up"></i>
+                    </div>
+                </th>
+                <th scope="status col">status</th>
                 <th class="actions"></th>
                 <th class="actions"></th>
             </tr>

@@ -9,6 +9,11 @@ export interface ITask {
   isPayed: boolean;
 }
 
+export interface ITaskSort {
+  sortBy: string;
+  orderByDecCre: boolean;
+}
+
 export interface IResponseTask {
   first: number;
   prev: number;

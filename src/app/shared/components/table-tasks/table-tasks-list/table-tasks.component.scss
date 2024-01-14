@@ -1,18 +1,23 @@
 @import '../../../../../assets/styles/colors.scss';
 
 .header-actions{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: space-around;
+    width: 100%;
     margin-bottom: 32px;
 }
+
+.button-container{
+    max-width: 250px;
+    display: flex;
+    width: 100%;
+    margin-left: auto;
+    }	
 
 .table-responsive {
     border: solid 1px $soft-color;
     border-radius: 8px;
     overflow-y: auto;
-    max-height: 580px;
-
+    max-height: 500px;
     table {
         margin: 0;
 
@@ -20,6 +25,9 @@
             vertical-align: middle;
             height: 74px;
             th {
+                i{
+                    margin-left: 16px;
+                }
                 padding: 0px 32px;
                 font-size: 16px;
                 font-weight: 600;

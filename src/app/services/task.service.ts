@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   IResponseTask,
   ITask,
+  ITaskSort,
 } from '../shared/components/table-tasks/interfaces/task.interface';
 import { Observable, filter } from 'rxjs';
 
@@ -10,12 +11,24 @@ import { Observable, filter } from 'rxjs';
 export class TaskService {
   constructor(private http: HttpClient) {}
 
-  getTasks(filters: ITask, page: number, pageSize: number): Observable<any> {
+  getTasks(
+    filters: ITask,
+    sort: ITaskSort,
+    page: number,
+    pageSize: number
+  ): Observable<IResponseTask> {
     let params = new HttpParams();
     params = params.append('name', filters.name);
+    params = params.append('isPayed', filters.isPayed ? filters.isPayed : '');
+    params = params.append(
+      '_sort',
+      `${sort.orderByDecCre && sort.sortBy !== '' ? '' : '-'}${sort.sortBy}`
+    );
     params = params.append('_page', page);
     params = params.append('_per_page', pageSize);
-    return this.http.get<any>(`http://localhost:3030/tasks`, { params });
+    return this.http.get<IResponseTask>(`http://localhost:3030/tasks`, {
+      params,
+    });
   }
 
   edit(task: ITask) {

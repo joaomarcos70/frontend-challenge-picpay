@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { TaskService } from 'src/app/services/task.service';
-import { ITask } from '../interfaces/task.interface';
+import { ITask, ITaskSort } from '../interfaces/task.interface';
 
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { TableTasksEditComponent } from '../table-tasks-edit/table-tasks-edit.component';
@@ -20,8 +20,10 @@ export class TableTasksComponent implements OnInit {
   tasks: ITask[] = [];
   searchSubject = new Subject<string>();
   bsModalRef?: BsModalRef;
+
   filterForm: FormGroup = new FormGroup({
     name: new FormControl(''),
+    isPayed: new FormControl(null),
   });
 
   isLoading = true;
@@ -31,6 +33,11 @@ export class TableTasksComponent implements OnInit {
   total: number = 0;
   totalPages: number = 0;
   pageSize: number = 10;
+
+  sort: ITaskSort = {
+    sortBy: '',
+    orderByDecCre: false,
+  };
 
   showConfirmModal: boolean = false;
 
@@ -48,7 +55,7 @@ export class TableTasksComponent implements OnInit {
 
   filter() {
     this.taskService
-      .getTasks(this.filterForm.value, this.page, this.pageSize)
+      .getTasks(this.filterForm.value, this.sort, this.page, this.pageSize)
       .subscribe({
         next: (tasks) => {
           this.tasks = tasks.data;
@@ -72,6 +79,7 @@ export class TableTasksComponent implements OnInit {
         switchMap(() =>
           this.taskService.getTasks(
             this.filterForm.value,
+            this.sort,
             this.page,
             this.pageSize
           )
@@ -109,9 +117,7 @@ export class TableTasksComponent implements OnInit {
   }
 
   add() {
-    console.log('add');
     this.bsModalRef = this.modalService.show(TableTasksCreateComponent);
-
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
@@ -127,6 +133,16 @@ export class TableTasksComponent implements OnInit {
       initialState
     );
     this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+  handleFilter(filter: string) {
+    this.sort.sortBy = filter;
+    this.sort.orderByDecCre = !this.sort.orderByDecCre;
+    this.filter();
+  }
+
+  filterGroup() {
+    this.filter();
   }
 
   openConfirmModal(task: ITask) {

@@ -20,7 +20,7 @@
         </div>
         <div class="my-3">
             <label for="">status</label>
-            <select (change)="handlePayment($event)" class="form-select form-select-lg mb-3"
+            <select (change)="handlePayment($event)" formControlName="status" class="form-select form-select-lg mb-3"
                 aria-label="seletor de status pagamento">
                 <option value="true">pago</option>
                 <option value="false">em aberto</option>
