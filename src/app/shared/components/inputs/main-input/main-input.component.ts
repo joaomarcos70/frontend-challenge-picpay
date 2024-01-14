@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { inputType } from './interfaces/main-input.interface';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-main-input',
@@ -21,12 +22,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class MainInputComponent implements ControlValueAccessor {
+  constructor(private currencyPipe: CurrencyPipe, private datePipe: DatePipe) {}
   @Input() type: inputType = 'text';
   @Input() placeholder = '';
   @Input() label? = '';
   @Input() disabled = false;
   @Input() readonly = false;
   @Input() showContent = false;
+  @Input() currency = false;
+  @Input() date = false;
 
   @Output() keyUp = new EventEmitter<KeyboardEvent>();
 

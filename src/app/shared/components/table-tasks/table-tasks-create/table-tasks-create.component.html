@@ -1,8 +1,8 @@
-<div class="edit-container">
+<div class="create-container">
     <div class="title">
         <h3>edite sua tarefa</h3>
     </div>
-    <form [formGroup]="editForm">
+    <form [formGroup]="formCreate">
 
         <div class="my-3">
             <app-main-input label="nome" placeholder="digite seu nome" formControlName="name"></app-main-input>
@@ -19,12 +19,17 @@
                 formControlName="value"></app-main-input>
         </div>
         <div class="my-3">
-            <app-main-input label="status" placeholder="nome" formControlName="isPayed"></app-main-input>
+            <label for="">status</label>
+            <select (change)="handlePayment($event)" class="form-select form-select-lg mb-3"
+                aria-label="seletor de status pagamento">
+                <option value="true">pago</option>
+                <option value="false">em aberto</option>
+            </select>
         </div>
     </form>
     <div class="footer-edit">
         <div>
-            <button class="secondary-button" (click)="saveTask()">salvar</button>
+            <button class="secondary-button" (click)="create()">salvar</button>
         </div>
     </div>
 </div>

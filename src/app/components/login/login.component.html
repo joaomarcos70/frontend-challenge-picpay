@@ -11,18 +11,18 @@
                 </div>
 
                 <div class="login-body">
-                    <app-main-input formControlName="username" label="email"
-                        placeholder="digite seu e-mail"></app-main-input>
-
-                    <app-main-input formControlName="password" type="password" label="senha" [showContent]="true"
-                        placeholder="digite sua senha"></app-main-input>
+                    <div class="mt-6">
+                        <app-main-input formControlName="username" label="email"
+                            placeholder="digite seu e-mail"></app-main-input>
+                    </div>
+                    <div class="mt-6">
+                        <app-main-input formControlName="password" type="password" label="senha" [showContent]="true"
+                            placeholder="digite sua senha"></app-main-input>
+                    </div>
                 </div>
 
                 <div class="footer-login">
-                    <div>
-                        <button [disabled]="loginForm.invalid" class="secondary-button"
-                            (click)="login()">entrar</button>
-                    </div>
+                    <button [disabled]="loginForm.invalid" class="secondary-button" (click)="login()">entrar</button>
                 </div>
 
             </div>

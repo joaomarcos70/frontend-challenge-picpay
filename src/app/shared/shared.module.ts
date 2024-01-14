@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -11,12 +11,14 @@ import { TableTasksEditComponent } from './components/table-tasks/table-tasks-ed
 import { TableTasksComponent } from './components/table-tasks/table-tasks-list/table-tasks.component';
 import { MatPaginatorIntlPtBr } from './utils/paginator-intl.util.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { TableTasksCreateComponent } from './components/table-tasks/table-tasks-create/table-tasks-create.component';
 @NgModule({
   declarations: [
     MainInputComponent,
     NavbarComponent,
     TableTasksComponent,
     TableTasksEditComponent,
+    TableTasksCreateComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatPaginatorModule],
   exports: [
@@ -24,10 +26,13 @@ import { BsModalService } from 'ngx-bootstrap/modal';
     NavbarComponent,
     TableTasksComponent,
     TableTasksEditComponent,
+    TableTasksCreateComponent,
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: MatPaginatorIntlPtBr },
     BsModalService,
+    CurrencyPipe,
+    DatePipe,
   ],
 })
 export class SharedModule {}

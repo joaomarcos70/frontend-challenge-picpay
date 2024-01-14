@@ -6,6 +6,7 @@ import { ITask } from '../interfaces/task.interface';
 
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { TableTasksEditComponent } from '../table-tasks-edit/table-tasks-edit.component';
+import { TableTasksCreateComponent } from '../table-tasks-create/table-tasks-create.component';
 
 @Component({
   selector: 'app-table-tasks',
@@ -104,18 +105,15 @@ export class TableTasksComponent implements OnInit {
 
   add() {
     console.log('add');
+    this.bsModalRef = this.modalService.show(TableTasksCreateComponent);
+
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   edit(task: ITask) {
     const initialState: ModalOptions = {
       initialState: {
-        list: [
-          'Open a modal with component',
-          'Pass your data',
-          'Do something else',
-          '...',
-        ],
-        title: 'Modal with component',
+        data: task,
       },
     };
 
@@ -127,6 +125,16 @@ export class TableTasksComponent implements OnInit {
   }
 
   remove(task: ITask) {
-    console.log('delete');
+    this.taskService.delete(task).subscribe({
+      next: (task) => {
+        console.log(task);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+        console.log('complete');
+      },
+    });
   }
 }

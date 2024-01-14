@@ -1,7 +1,6 @@
 @import '../../../../../assets/styles/colors.scss';
 
 .main-input-container {
-    //margin-bottom: 32px;
     position: relative;
     input{
         width: 100%;
@@ -28,10 +27,4 @@
         position: absolute;
         right: 0;
     }
-}
-
-label{
-    font-size: 16px;
-    font-weight: 500;
-    color: $dark-color;
 }
