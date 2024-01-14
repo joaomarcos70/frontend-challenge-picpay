@@ -1,6 +1,6 @@
 <div class="create-container">
     <div class="title">
-        <h3>edite sua tarefa</h3>
+        <h3>adicionar pagamento</h3>
     </div>
     <form [formGroup]="formCreate">
 
@@ -17,14 +17,6 @@
         <div class="my-3">
             <app-main-input [currency]="true" label="valor" placeholder="digite o valor"
                 formControlName="value"></app-main-input>
-        </div>
-        <div class="my-3">
-            <label for="">status</label>
-            <select (change)="handlePayment($event)" formControlName="status" class="form-select form-select-lg mb-3"
-                aria-label="seletor de status pagamento">
-                <option value="true">pago</option>
-                <option value="false">em aberto</option>
-            </select>
         </div>
     </form>
     <div class="footer-edit">

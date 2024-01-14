@@ -1,5 +1,6 @@
-<app-confirm-modal title="modal de confirmação" message="tem certeza que deseja deletar o pagamento"
-    [show]="showConfirmModal" (cancel)="closeConfirmModal()" (confirm)="remove($event)"></app-confirm-modal>
+<app-confirm-modal title="você quer mesmo excluir esse pagamento?"
+    message="ao clicar em confirmar, o pagamento será excluído." [show]="showConfirmModal"
+    (cancel)="closeConfirmModal()" (confirm)="remove($event)"></app-confirm-modal>
 
 
 <div class="header-actions">

@@ -117,7 +117,10 @@ export class TableTasksComponent implements OnInit {
   }
 
   add() {
-    this.bsModalRef = this.modalService.show(TableTasksCreateComponent);
+    this.bsModalRef = this.modalService.show(
+      TableTasksCreateComponent,
+      Object.assign({}, { class: 'modal-dialog-centered' })
+    );
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
@@ -130,7 +133,7 @@ export class TableTasksComponent implements OnInit {
 
     this.bsModalRef = this.modalService.show(
       TableTasksEditComponent,
-      initialState
+      Object.assign({}, { class: 'modal-dialog-centered' }, initialState)
     );
     this.bsModalRef.content.closeBtnName = 'Close';
   }

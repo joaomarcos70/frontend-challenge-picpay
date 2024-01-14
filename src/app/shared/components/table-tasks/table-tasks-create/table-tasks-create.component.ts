@@ -32,7 +32,6 @@ export class TableTasksCreateComponent implements OnInit {
       title: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
       value: new FormControl('', Validators.required),
-      isPayed: new FormControl(false),
     });
   }
 
