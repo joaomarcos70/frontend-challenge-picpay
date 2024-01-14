@@ -1701,14 +1701,6 @@
       "isPayed": true
     },
     {
-      "id": "b1c7",
-      "name": "teste",
-      "title": "teste",
-      "date": "12/12/2020",
-      "value": "12.20",
-      "isPayed": false
-    },
-    {
       "id": "05d0",
       "name": "teste2",
       "title": "teste",
@@ -1723,14 +1715,6 @@
       "date": "12/22/2020",
       "value": "21",
       "isPayed": false
-    },
-    {
-      "id": "ed24",
-      "name": "teste44",
-      "title": "teste",
-      "date": "12/10/2020",
-      "value": "13.00",
-      "isPayed": "true"
     }
   ],
   "account": [

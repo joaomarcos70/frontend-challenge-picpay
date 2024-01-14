@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { TaskService } from 'src/app/services/task.service';
@@ -7,6 +7,7 @@ import { ITask } from '../interfaces/task.interface';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { TableTasksEditComponent } from '../table-tasks-edit/table-tasks-edit.component';
 import { TableTasksCreateComponent } from '../table-tasks-create/table-tasks-create.component';
+import { ConfirmModalComponent } from '../../modals/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-table-tasks',
@@ -14,6 +15,8 @@ import { TableTasksCreateComponent } from '../table-tasks-create/table-tasks-cre
   styleUrls: ['./table-tasks.component.scss'],
 })
 export class TableTasksComponent implements OnInit {
+  @ViewChild(ConfirmModalComponent) confirmModal!: ConfirmModalComponent;
+
   tasks: ITask[] = [];
   searchSubject = new Subject<string>();
   bsModalRef?: BsModalRef;
@@ -28,6 +31,8 @@ export class TableTasksComponent implements OnInit {
   total: number = 0;
   totalPages: number = 0;
   pageSize: number = 10;
+
+  showConfirmModal: boolean = false;
 
   totalPagesArray: number[] = [];
 
@@ -124,7 +129,17 @@ export class TableTasksComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
+  openConfirmModal(task: ITask) {
+    this.confirmModal.task = task;
+    this.showConfirmModal = true;
+  }
+
+  closeConfirmModal() {
+    this.showConfirmModal = false;
+  }
+
   remove(task: ITask) {
+    console.log(task);
     this.taskService.delete(task).subscribe({
       next: (task) => {
         console.log(task);
@@ -133,7 +148,7 @@ export class TableTasksComponent implements OnInit {
         console.log(error);
       },
       complete: () => {
-        console.log('complete');
+        this.showConfirmModal = false;
       },
     });
   }

@@ -12,6 +12,7 @@ import { TableTasksComponent } from './components/table-tasks/table-tasks-list/t
 import { MatPaginatorIntlPtBr } from './utils/paginator-intl.util.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { TableTasksCreateComponent } from './components/table-tasks/table-tasks-create/table-tasks-create.component';
+import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
 @NgModule({
   declarations: [
     MainInputComponent,
@@ -19,6 +20,7 @@ import { TableTasksCreateComponent } from './components/table-tasks/table-tasks-
     TableTasksComponent,
     TableTasksEditComponent,
     TableTasksCreateComponent,
+    ConfirmModalComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatPaginatorModule],
   exports: [
@@ -27,6 +29,7 @@ import { TableTasksCreateComponent } from './components/table-tasks/table-tasks-
     TableTasksComponent,
     TableTasksEditComponent,
     TableTasksCreateComponent,
+    ConfirmModalComponent,
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: MatPaginatorIntlPtBr },

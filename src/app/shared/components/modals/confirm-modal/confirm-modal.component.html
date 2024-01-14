@@ -1,0 +1,18 @@
+<div class="container-modal" (click)="onBackgroundClick()" *ngIf="show">
+    <div class="modal">
+        <div class="title">
+            <h3>{{title}}</h3>
+        </div>
+        <div class="body mt-6">
+            <p>{{message}}</p>
+        </div>
+        <div class="footer mt-6">
+            <div>
+                <button class="secondary-button" (click)="onCancel()">{{cancelButtonTxt}}</button>
+            </div>
+            <div class="button-container">
+                <button class="primary-button" (click)="onConfirm()">{{confirmButtonTxt}}</button>
+            </div>
+        </div>
+    </div>
+</div>
