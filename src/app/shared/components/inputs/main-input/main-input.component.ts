@@ -24,6 +24,8 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 export class MainInputComponent implements ControlValueAccessor {
   constructor(private currencyPipe: CurrencyPipe, private datePipe: DatePipe) {}
   @Input() type: inputType = 'text';
+  @Input() value = '';
+  @Input() mask = '';
   @Input() placeholder = '';
   @Input() label? = '';
   @Input() disabled = false;
@@ -34,7 +36,7 @@ export class MainInputComponent implements ControlValueAccessor {
 
   @Output() keyUp = new EventEmitter<KeyboardEvent>();
 
-  value: string = '';
+  internalValue: string = '';
   showText = false;
   onChange: any = () => {};
   onTouched: any = () => {};
@@ -53,7 +55,7 @@ export class MainInputComponent implements ControlValueAccessor {
   }
 
   writeValue(value: string): void {
-    this.value = value;
+    this.internalValue = value;
   }
 
   registerOnChange(onChange: any): void {

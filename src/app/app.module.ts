@@ -13,8 +13,15 @@ import { TaskService } from './services/task.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import {
+  IConfig,
+  NgxMaskDirective,
+  NgxMaskPipe,
+  provideEnvironmentNgxMask,
+} from 'ngx-mask';
 
 registerLocaleData(localePt);
+
 @NgModule({
   declarations: [AppComponent, LoginComponent, HomeComponent],
   imports: [
@@ -25,11 +32,14 @@ registerLocaleData(localePt);
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
   providers: [
     AuthService,
     UserService,
     TaskService,
+    provideEnvironmentNgxMask(),
     { provide: LOCALE_ID, useValue: 'pt-BR' },
   ],
   bootstrap: [AppComponent],

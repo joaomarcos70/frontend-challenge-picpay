@@ -2,14 +2,14 @@
     <label *ngIf="label != ''" class="form-label ">{{label}}</label>
 
     <div *ngIf="!showContent; else showContentContainer">
-        <input [(ngModel)]="value" [type]="type" (keyup)="changeValue($event)" class="form-control"
-            [placeholder]="placeholder">
+        <input [value]="value" [mask]="mask" [(ngModel)]="internalValue" [type]="type" (keyup)="changeValue($event)"
+            class="form-control" [placeholder]="placeholder">
     </div>
 
     <ng-template class="shoq-content-container" #showContentContainer>
         <div class="input-container-icon">
-            <input [(ngModel)]="value" [type]="type" (keyup)="changeValue($event)" class="form-control"
-                [placeholder]="placeholder">
+            <input [(ngModel)]="internalValue" [mask]="mask" [value]="value" [type]="type" (keyup)="changeValue($event)"
+                class="form-control" [placeholder]="placeholder">
             <span (click)="onHideShowText()">
                 <i *ngIf="!showText" class="bi bi-eye"></i>
                 <i *ngIf="showText" class="bi bi-eye-slash"></i>

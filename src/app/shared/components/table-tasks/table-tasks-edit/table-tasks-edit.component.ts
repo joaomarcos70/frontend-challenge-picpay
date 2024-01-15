@@ -3,6 +3,7 @@ import { Form, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ITask } from '../interfaces/task.interface';
 import { TaskService } from 'src/app/services/task.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-table-tasks-edit',
@@ -10,8 +11,10 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./table-tasks-edit.component.scss'],
 })
 export class TableTasksEditComponent implements OnInit {
-  data: ITask = {} as ITask;
+  data: any = {};
   editForm: FormGroup = new FormGroup({});
+
+  formatedValue: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -21,7 +24,7 @@ export class TableTasksEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    console.log(typeof this.data.value);
+    console.log(this.data);
   }
 
   createForm() {
@@ -29,20 +32,60 @@ export class TableTasksEditComponent implements OnInit {
       id: new FormControl(this.data.id),
       name: new FormControl(this.data.name),
       title: new FormControl(this.data.title),
-      date: new FormControl(this.data.date),
-      value: new FormControl(this.data.value),
+      date: new FormControl(this.data.formatedDate),
+      value: new FormControl(this.data.formatedValue),
       isPayed: new FormControl(this.data.isPayed),
     });
   }
 
+  formatarValor(event: any) {
+    let valorDigitado = event.target.value;
+    valorDigitado = valorDigitado.replace(/[^\d,]/g, '');
+    const valorFormatado = parseFloat(valorDigitado.replace(',', '.')).toFixed(
+      2
+    );
+
+    if (isNaN(parseFloat(valorFormatado))) {
+      this.editForm.controls['value'].setValue('R$ 0,00');
+      return;
+    }
+    const partes = valorFormatado.split('.');
+    const parteInteiraSemPontos = partes[0].replace(/\./g, '');
+    const parteInteiraComPontos = parteInteiraSemPontos.replace(
+      /\B(?=(\d{3})+(?!\d))/g,
+      '.'
+    );
+
+    const parteDecimal = partes[1] || '00';
+
+    this.editForm.controls['value'].setValue(
+      `R$ ${parteInteiraComPontos},${parteDecimal}`
+    );
+  }
+
+  convertValueToFloat() {
+    const value = this.editForm.controls['value'].value;
+    const valueWithoutMask = value.replace('R$ ', '').replace('.', '');
+    const valueFloat = parseFloat(valueWithoutMask.replace(',', '.'));
+    this.editForm.controls['value'].setValue(valueFloat);
+  }
+
+  convertDateToISO() {
+    const date = this.editForm.controls['date'].value;
+    const dateArray = date.split('/');
+    const dateISO = `${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`;
+    this.editForm.controls['date'].setValue(new Date(dateISO).toISOString());
+  }
+
   saveTask() {
+    this.convertValueToFloat();
+    this.convertDateToISO();
     this.taskService.edit(this.editForm.value).subscribe({
       error: (error) => {
         console.log(error);
       },
       complete: () => {
         this.bsModalRef.hide();
-        console.log('complete');
       },
     });
   }

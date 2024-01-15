@@ -20,7 +20,7 @@
     <form [formGroup]="filterForm">
         <div class="row mt-6">
             <div class="col-md-4">
-                <app-main-input (keyup)=" search($event)" formControlName="name" placeholder="buscar pelo nome">
+                <app-main-input (keyup)="search($event)" formControlName="name" placeholder="buscar pelo nome">
                 </app-main-input>
             </div>
             <div class="col-md-8">

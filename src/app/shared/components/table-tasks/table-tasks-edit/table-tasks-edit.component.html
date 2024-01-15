@@ -11,15 +11,20 @@
             <app-main-input label="titulo" placeholder="digite seu titulo" formControlName="title"></app-main-input>
         </div>
         <div class="my-3">
-            <app-main-input [date]="true" label="data" placeholder="digite sua data"
+            <app-main-input mask="00/00/0000" [date]="true" label="data" placeholder="digite sua data"
                 formControlName="date"></app-main-input>
         </div>
         <div class="my-3">
-            <app-main-input [currency]="true" label="valor" placeholder="digite o valor"
+            <app-main-input label="valor" (change)="formatarValor($event)" placeholder="digite o valor"
                 formControlName="value"></app-main-input>
         </div>
         <div class="my-3">
-            <app-main-input label="status" placeholder="nome" formControlName="isPayed"></app-main-input>
+            <label for="">status</label>
+            <select formControlName="isPayed" class="form-select form-select-lg mb-3"
+                aria-label="seletor de status pagamento">
+                <option value="true">pago</option>
+                <option value="false">em aberto</option>
+            </select>
         </div>
     </form>
     <div class="footer-edit">

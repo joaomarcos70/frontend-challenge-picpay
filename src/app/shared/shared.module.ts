@@ -13,6 +13,8 @@ import { MatPaginatorIntlPtBr } from './utils/paginator-intl.util.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { TableTasksCreateComponent } from './components/table-tasks/table-tasks-create/table-tasks-create.component';
 import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
+import { DateFormatPipe } from './utils/pipes/date-format.pipe';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 @NgModule({
   declarations: [
     MainInputComponent,
@@ -21,8 +23,16 @@ import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm
     TableTasksEditComponent,
     TableTasksCreateComponent,
     ConfirmModalComponent,
+    DateFormatPipe,
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatPaginatorModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
+  ],
   exports: [
     MainInputComponent,
     NavbarComponent,
@@ -36,6 +46,7 @@ import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm
     BsModalService,
     CurrencyPipe,
     DatePipe,
+    provideNgxMask(),
   ],
 })
 export class SharedModule {}

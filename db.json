@@ -1701,28 +1701,20 @@
       "isPayed": true
     },
     {
-      "id": "05d0",
-      "name": "teste2",
-      "title": "teste",
-      "date": "12/12/2020",
-      "value": "12.20",
-      "isPayed": false
-    },
-    {
       "id": "90aa",
       "name": "teste3",
       "title": "tetes",
-      "date": "12/22/2020",
-      "value": "21",
-      "isPayed": false
+      "date": "2020-11-20T00:00:00.000Z",
+      "value": null,
+      "isPayed": "true"
     },
     {
       "id": "8974",
       "name": "teste sem status",
       "title": "teste123",
-      "date": "12/10/2023",
-      "value": "10",
-      "isPayed": false
+      "date": "2023-12-10T00:00:00.000Z",
+      "value": 10,
+      "isPayed": "true"
     },
     {
       "id": "ff40",
@@ -1731,6 +1723,28 @@
       "date": "12/10/1999",
       "value": "12",
       "isPayed": false
+    },
+    {
+      "id": "e684",
+      "name": "teste99",
+      "title": "teste999teste",
+      "date": "12/12/2202",
+      "value": "R$ 123.123,00"
+    },
+    {
+      "id": "f406",
+      "name": "teste111",
+      "title": "etetetet",
+      "date": "2020-12-12T00:00:00.000Z",
+      "value": 1000.03
+    },
+    {
+      "id": "3ffb",
+      "name": "TESTE-FINAL",
+      "title": "TESTE",
+      "date": "2312-12-12T00:00:00.000Z",
+      "value": 123123.123,
+      "isPayed": "true"
     }
   ],
   "account": [

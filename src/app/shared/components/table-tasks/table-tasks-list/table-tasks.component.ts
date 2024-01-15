@@ -1,6 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+} from 'rxjs';
 import { TaskService } from 'src/app/services/task.service';
 import { ITask, ITaskSort } from '../interfaces/task.interface';
 
@@ -8,6 +14,7 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { TableTasksEditComponent } from '../table-tasks-edit/table-tasks-edit.component';
 import { TableTasksCreateComponent } from '../table-tasks-create/table-tasks-create.component';
 import { ConfirmModalComponent } from '../../modals/confirm-modal/confirm-modal.component';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-table-tasks',
@@ -45,7 +52,9 @@ export class TableTasksComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private currencyPipe: CurrencyPipe,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit() {
@@ -122,9 +131,29 @@ export class TableTasksComponent implements OnInit {
       Object.assign({}, { class: 'modal-dialog-centered' })
     );
     this.bsModalRef.content.closeBtnName = 'Close';
+
+    (this.bsModalRef.onHidden as Observable<any>).subscribe(() => {
+      this.filter();
+    });
   }
 
-  edit(task: ITask) {
+  edit(task: any) {
+    const formatedDate = this.datePipe.transform(
+      task.date,
+      'dd/MM/yyyy'
+    ) as string;
+
+    const formatedValue = task.value.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    });
+
+    task = {
+      ...task,
+      formatedDate: formatedDate,
+      formatedValue: formatedValue,
+    };
+
     const initialState: ModalOptions = {
       initialState: {
         data: task,
@@ -136,6 +165,10 @@ export class TableTasksComponent implements OnInit {
       Object.assign({}, { class: 'modal-dialog-centered' }, initialState)
     );
     this.bsModalRef.content.closeBtnName = 'Close';
+
+    (this.bsModalRef.onHidden as Observable<any>).subscribe(() => {
+      this.filter();
+    });
   }
 
   handleFilter(filter: string) {
