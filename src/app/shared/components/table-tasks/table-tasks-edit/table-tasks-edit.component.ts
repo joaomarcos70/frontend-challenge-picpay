@@ -24,7 +24,6 @@ export class TableTasksEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    console.log(this.data);
   }
 
   createForm() {
@@ -65,7 +64,14 @@ export class TableTasksEditComponent implements OnInit {
 
   convertValueToFloat() {
     const value = this.editForm.controls['value'].value;
-    const valueWithoutMask = value.replace('R$ ', '').replace('.', '');
+    console.log(value);
+    /*     const valueWithoutMask = value.replace('R$ ', '').replace('.', '');
+
+ */
+    const valueWithoutMask = value
+      .replace(/R\$\s?/g, '')
+      .replace(/\./g, '')
+      .replace(',', '.');
     const valueFloat = parseFloat(valueWithoutMask.replace(',', '.'));
     this.editForm.controls['value'].setValue(valueFloat);
   }

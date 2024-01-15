@@ -15,6 +15,7 @@ import { TableTasksCreateComponent } from './components/table-tasks/table-tasks-
 import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
 import { DateFormatPipe } from './utils/pipes/date-format.pipe';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { ToastComponent } from './components/toast/toast.component';
 @NgModule({
   declarations: [
     MainInputComponent,
@@ -24,6 +25,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     TableTasksCreateComponent,
     ConfirmModalComponent,
     DateFormatPipe,
+    ToastComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     TableTasksEditComponent,
     TableTasksCreateComponent,
     ConfirmModalComponent,
+    ToastComponent,
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: MatPaginatorIntlPtBr },

@@ -17,9 +17,25 @@ export class LoginComponent implements OnInit, OnDestroy {
     private navigationService: NavigationStateService
   ) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      username: [
+        '',
+        [Validators.required, Validators.email],
+        { updateOn: 'submit' || 'blur' || 'change' },
+      ],
+      password: [
+        '',
+        [Validators.required, Validators.minLength(6)],
+        { updateOn: 'submit' || 'blur' || 'change' },
+      ],
     });
+  }
+
+  get username() {
+    return this.loginForm.controls['username'];
+  }
+
+  get password() {
+    return this.loginForm.controls['password'];
   }
 
   ngOnInit() {
@@ -31,6 +47,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
+    /*     if (this.loginForm.invalid) {
+      return;
+    } */
+
     this.authService.login(
       this.loginForm.value.username,
       this.loginForm.value.password

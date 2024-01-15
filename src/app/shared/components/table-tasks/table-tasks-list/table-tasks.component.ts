@@ -28,6 +28,9 @@ export class TableTasksComponent implements OnInit {
   searchSubject = new Subject<string>();
   bsModalRef?: BsModalRef;
 
+  toastMessage: string = '';
+  toastShow: boolean = false;
+
   filterForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     isPayed: new FormControl(null),
@@ -132,7 +135,8 @@ export class TableTasksComponent implements OnInit {
     );
     this.bsModalRef.content.closeBtnName = 'Close';
 
-    (this.bsModalRef.onHidden as Observable<any>).subscribe(() => {
+    (this.bsModalRef.onHidden as Observable<any>).subscribe((res) => {
+      res.id ? this.showToast('Pagamento criado com sucesso!') : null;
       this.filter();
     });
   }
@@ -166,7 +170,8 @@ export class TableTasksComponent implements OnInit {
     );
     this.bsModalRef.content.closeBtnName = 'Close';
 
-    (this.bsModalRef.onHidden as Observable<any>).subscribe(() => {
+    (this.bsModalRef.onHidden as Observable<any>).subscribe((res) => {
+      res.id ? this.showToast('Pagamento editado com sucesso!') : null;
       this.filter();
     });
   }
@@ -190,8 +195,17 @@ export class TableTasksComponent implements OnInit {
     this.showConfirmModal = false;
   }
 
+  hideToast() {
+    this.toastShow = false;
+    this.toastMessage = '';
+  }
+
+  showToast(message: string) {
+    this.toastMessage = message;
+    this.toastShow = true;
+  }
+
   remove(task: ITask) {
-    console.log(task);
     this.taskService.delete(task).subscribe({
       next: (task) => {
         console.log(task);
@@ -200,7 +214,8 @@ export class TableTasksComponent implements OnInit {
         console.log(error);
       },
       complete: () => {
-        this.showConfirmModal = false;
+        this.showToast('Pagamento removido com sucesso!');
+        this.filter();
       },
     });
   }

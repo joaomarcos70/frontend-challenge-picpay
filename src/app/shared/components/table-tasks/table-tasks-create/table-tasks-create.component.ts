@@ -85,7 +85,7 @@ export class TableTasksCreateComponent implements OnInit {
 
     this.taskService.create(this.formCreate.value).subscribe({
       next: (task) => {
-        console.log(task);
+        //console.log(task);
       },
       error: (error) => {
         console.log(error);

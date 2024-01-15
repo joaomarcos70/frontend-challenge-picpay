@@ -14,7 +14,8 @@
                 <i *ngIf="!showText" class="bi bi-eye"></i>
                 <i *ngIf="showText" class="bi bi-eye-slash"></i>
             </span>
-
         </div>
     </ng-template>
 </div>
+
+<p class="error-text" *ngIf="showError">{{errorMessage}}</p>

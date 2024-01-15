@@ -1,7 +1,8 @@
+<app-toast [show]="toastShow" [message]="toastMessage" (onHide)="hideToast()"></app-toast>
+
 <app-confirm-modal title="você quer mesmo excluir esse pagamento?"
     message="ao clicar em confirmar, o pagamento será excluído." [show]="showConfirmModal"
     (cancel)="closeConfirmModal()" (confirm)="remove($event)"></app-confirm-modal>
-
 
 <div class="header-actions">
     <div class="row">

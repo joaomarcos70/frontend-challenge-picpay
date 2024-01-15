@@ -1,4 +1,4 @@
-<form action="" [formGroup]="loginForm">
+<form (ngSubmit)="login()" [formGroup]="loginForm">
     <div class="view-login">
         <div class="image-container">
             <img src="../../../assets/public/challenge-picpay.jpg" alt="mulher fazendo pagamento">
@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="footer-login">
-                    <button [disabled]="loginForm.invalid" class="secondary-button" (click)="login()">entrar</button>
+                    <button type="submit" [disabled]="!loginForm.valid" class="secondary-button">entrar</button>
                 </div>
 
             </div>

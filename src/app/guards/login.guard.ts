@@ -11,6 +11,5 @@ export const loginGuard: CanActivateFn = (
   | boolean
   | UrlTree => {
   const loggedUser = localStorage.getItem('loggedUser');
-  console.log(loggedUser);
-  return loggedUser ? inject(Router).createUrlTree(['/home']) : false;
+  return loggedUser ? inject(Router).createUrlTree(['/home']) : true;
 };

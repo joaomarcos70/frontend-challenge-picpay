@@ -28,3 +28,10 @@
         right: 0;
     }
 }
+
+p.error-text{
+    color: $danger-color;
+    font-size: 14px;
+    word-wrap: break-word;
+    //margin-left: 16px;
+}
