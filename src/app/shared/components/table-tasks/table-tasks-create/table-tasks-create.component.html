@@ -15,7 +15,7 @@
                 formControlName="date"></app-main-input>
         </div>
         <div class="my-3">
-            <app-main-input [currency]="true" label="valor" (change)="formatarValor($event)"
+            <app-main-input dataTestId="input-value" [currency]="true" label="valor" (change)="formatValue($event)"
                 placeholder="digite o valor" formControlName="value"></app-main-input>
         </div>
         <div class="my-3">
@@ -29,7 +29,8 @@
     </form>
     <div class="footer-edit">
         <div>
-            <button class="secondary-button" (click)="create()">salvar</button>
+            <button [disabled]="!formCreate.valid" [attr.data-testid]="'button-create'" class="secondary-button"
+                (click)="create()">salvar</button>
         </div>
     </div>
 </div>

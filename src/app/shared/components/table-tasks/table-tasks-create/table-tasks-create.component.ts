@@ -36,32 +36,26 @@ export class TableTasksCreateComponent implements OnInit {
     });
   }
 
-  handlePayment(event: any) {
-    this.formCreate.controls['isPayed'].setValue(event.target.value);
-  }
+  formatValue(event: any) {
+    let typedValue = event.target.value;
+    typedValue = typedValue.replace(/[^\d,]/g, '');
+    const formatedValue = parseFloat(typedValue.replace(',', '.')).toFixed(2);
 
-  formatarValor(event: any) {
-    let valorDigitado = event.target.value;
-    valorDigitado = valorDigitado.replace(/[^\d,]/g, '');
-    const valorFormatado = parseFloat(valorDigitado.replace(',', '.')).toFixed(
-      2
-    );
-
-    if (isNaN(parseFloat(valorFormatado))) {
+    if (isNaN(parseFloat(formatedValue))) {
       this.formCreate.controls['value'].setValue('R$ 0,00');
       return;
     }
-    const partes = valorFormatado.split('.');
-    const parteInteiraSemPontos = partes[0].replace(/\./g, '');
-    const parteInteiraComPontos = parteInteiraSemPontos.replace(
+    const parts = formatedValue.split('.');
+    const realPartWithoutPoints = parts[0].replace(/\./g, '');
+    const realPartWithPoints = realPartWithoutPoints.replace(
       /\B(?=(\d{3})+(?!\d))/g,
       '.'
     );
 
-    const parteDecimal = partes[1] || '00';
+    const decimal = parts[1] || '00';
 
     this.formCreate.controls['value'].setValue(
-      `R$ ${parteInteiraComPontos},${parteDecimal}`
+      `R$ ${realPartWithPoints},${decimal}`
     );
   }
 
@@ -84,12 +78,6 @@ export class TableTasksCreateComponent implements OnInit {
     this.convertDateToISO();
 
     this.taskService.create(this.formCreate.value).subscribe({
-      next: (task) => {
-        //console.log(task);
-      },
-      error: (error) => {
-        console.log(error);
-      },
       complete: () => {
         this.bsModalRef.hide();
       },

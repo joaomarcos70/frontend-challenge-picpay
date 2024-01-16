@@ -1,9 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ITask } from '../interfaces/task.interface';
-import { TaskService } from 'src/app/services/task.service';
+import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { CurrencyPipe } from '@angular/common';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-table-tasks-edit',
@@ -29,45 +32,40 @@ export class TableTasksEditComponent implements OnInit {
   createForm() {
     this.editForm = this.fb.group({
       id: new FormControl(this.data.id),
-      name: new FormControl(this.data.name),
-      title: new FormControl(this.data.title),
-      date: new FormControl(this.data.formatedDate),
-      value: new FormControl(this.data.formatedValue),
-      isPayed: new FormControl(this.data.isPayed),
+      name: new FormControl(this.data.name, Validators.required),
+      title: new FormControl(this.data.title, Validators.required),
+      date: new FormControl(this.data.formatedDate, Validators.required),
+      value: new FormControl(this.data.formatedValue, Validators.required),
+      isPayed: new FormControl(this.data.isPayed, Validators.required),
     });
   }
 
-  formatarValor(event: any) {
-    let valorDigitado = event.target.value;
-    valorDigitado = valorDigitado.replace(/[^\d,]/g, '');
-    const valorFormatado = parseFloat(valorDigitado.replace(',', '.')).toFixed(
-      2
-    );
+  formatValue(event: any) {
+    let typedValue = event.target.value;
+    typedValue = typedValue.replace(/[^\d,]/g, '');
+    const formatedValue = parseFloat(typedValue.replace(',', '.')).toFixed(2);
 
-    if (isNaN(parseFloat(valorFormatado))) {
+    if (isNaN(parseFloat(formatedValue))) {
       this.editForm.controls['value'].setValue('R$ 0,00');
       return;
     }
-    const partes = valorFormatado.split('.');
-    const parteInteiraSemPontos = partes[0].replace(/\./g, '');
-    const parteInteiraComPontos = parteInteiraSemPontos.replace(
+    const parts = formatedValue.split('.');
+    const realPartWithoutPoints = parts[0].replace(/\./g, '');
+    const realPartWithPoints = realPartWithoutPoints.replace(
       /\B(?=(\d{3})+(?!\d))/g,
       '.'
     );
 
-    const parteDecimal = partes[1] || '00';
+    const decimal = parts[1] || '00';
 
     this.editForm.controls['value'].setValue(
-      `R$ ${parteInteiraComPontos},${parteDecimal}`
+      `R$ ${realPartWithPoints},${decimal}`
     );
   }
 
   convertValueToFloat() {
     const value = this.editForm.controls['value'].value;
-    console.log(value);
-    /*     const valueWithoutMask = value.replace('R$ ', '').replace('.', '');
 
- */
     const valueWithoutMask = value
       .replace(/R\$\s?/g, '')
       .replace(/\./g, '')
@@ -87,9 +85,6 @@ export class TableTasksEditComponent implements OnInit {
     this.convertValueToFloat();
     this.convertDateToISO();
     this.taskService.edit(this.editForm.value).subscribe({
-      error: (error) => {
-        console.log(error);
-      },
       complete: () => {
         this.bsModalRef.hide();
       },

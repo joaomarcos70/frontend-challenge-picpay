@@ -3,7 +3,8 @@
 
     <div *ngIf="!showContent; else showContentContainer">
         <input [value]="value" [attr.data-testid]="dataTestId" [mask]="mask" [(ngModel)]="internalValue" [type]="type"
-            (keyup)="changeValue($event)" class="form-control" [placeholder]="placeholder">
+            (keyup)="changeValue($event)" (change)="changeValue($event)" class="form-control"
+            [placeholder]="placeholder">
     </div>
 
     <ng-template class="shoq-content-container" #showContentContainer>

@@ -38,6 +38,7 @@ export class MainInputComponent implements ControlValueAccessor {
   @Input() dataTestId = '';
 
   @Output() keyUp = new EventEmitter<KeyboardEvent>();
+  @Output() change = new EventEmitter<KeyboardEvent>();
 
   internalValue: string = '';
   showText = false;
@@ -55,6 +56,7 @@ export class MainInputComponent implements ControlValueAccessor {
 
   changeValue(event: any): void {
     this.onChange(event.target.value);
+    this.change.emit(event);
   }
 
   writeValue(value: string): void {
