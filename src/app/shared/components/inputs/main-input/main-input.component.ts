@@ -5,9 +5,8 @@ import {
   Output,
   forwardRef,
 } from '@angular/core';
-import { inputType } from './interfaces/main-input.interface';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { inputType } from './interfaces/main-input.interface';
 
 @Component({
   selector: 'app-main-input',
@@ -22,7 +21,6 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
   ],
 })
 export class MainInputComponent implements ControlValueAccessor {
-  constructor(private currencyPipe: CurrencyPipe, private datePipe: DatePipe) {}
   @Input() type: inputType = 'text';
   @Input() value = '';
   @Input() mask = '';
