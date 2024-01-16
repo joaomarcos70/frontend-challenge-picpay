@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 
-type ToastType = 'success' | 'danger' | 'warning';
+export type ToastType = 'success' | 'error' | 'warning' | 'info';
 
 @Component({
   selector: 'app-toast',
@@ -17,10 +17,11 @@ type ToastType = 'success' | 'danger' | 'warning';
 export class ToastComponent implements OnInit {
   @Input() show: boolean = false;
   @Input() hide: boolean = false;
-  @Input() success: boolean = true;
+  /*   @Input() success: boolean = true;
   @Input() warning: boolean = false;
   @Input() danger: boolean = false;
-  @Input() info: boolean = false;
+  @Input() info: boolean = false; */
+  @Input() type: ToastType = 'success';
   @Input() message: string = '';
 
   @Output() onShow: EventEmitter<boolean> = new EventEmitter<boolean>();

@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { TaskService } from 'src/app/services/task.service';
+import { ToastType } from '../../toast/toast.component';
 
 @Component({
   selector: 'app-table-tasks-create',
@@ -15,6 +16,9 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class TableTasksCreateComponent implements OnInit {
   formCreate: FormGroup = new FormGroup({});
+  toastMessage = '';
+  showToast = false;
+  toastType: ToastType = 'success';
 
   constructor(
     private taskService: TaskService,
@@ -73,11 +77,26 @@ export class TableTasksCreateComponent implements OnInit {
     this.formCreate.controls['date'].setValue(new Date(dateISO).toISOString());
   }
 
+  handleToast(message: string, type: ToastType) {
+    this.showToast = true;
+    this.toastMessage = message;
+    this.toastType = type;
+  }
+
+  hideToast() {
+    this.showToast = false;
+    this.toastMessage = '';
+    this.toastType = 'success';
+  }
+
   create() {
     this.convertValueToFloat();
     this.convertDateToISO();
 
     this.taskService.create(this.formCreate.value).subscribe({
+      error: () => {
+        this.handleToast('erro desconhecido ao criar pagamento', 'error');
+      },
       complete: () => {
         this.bsModalRef.hide();
       },

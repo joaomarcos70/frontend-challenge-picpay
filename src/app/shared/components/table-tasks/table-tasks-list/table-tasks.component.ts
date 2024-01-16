@@ -15,6 +15,7 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ConfirmModalComponent } from '../../modals/confirm-modal/confirm-modal.component';
 import { TableTasksCreateComponent } from '../table-tasks-create/table-tasks-create.component';
 import { TableTasksEditComponent } from '../table-tasks-edit/table-tasks-edit.component';
+import { ToastType } from '../../toast/toast.component';
 
 @Component({
   selector: 'app-table-tasks',
@@ -30,6 +31,7 @@ export class TableTasksComponent implements OnInit {
 
   toastMessage: string = '';
   toastShow: boolean = false;
+  toastType: ToastType = 'success';
 
   filterForm: FormGroup = new FormGroup({
     name: new FormControl(''),
@@ -131,7 +133,9 @@ export class TableTasksComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close';
 
     (this.bsModalRef.onHidden as Observable<any>).subscribe((res) => {
-      res.id ? this.showToast('Pagamento criado com sucesso!') : null;
+      res.id
+        ? this.showToast('Pagamento criado com sucesso!', 'success')
+        : null;
       this.filter();
     });
   }
@@ -166,7 +170,9 @@ export class TableTasksComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close';
 
     (this.bsModalRef.onHidden as Observable<any>).subscribe((res) => {
-      res.id ? this.showToast('Pagamento editado com sucesso!') : null;
+      res.id
+        ? this.showToast('Pagamento editado com sucesso!', 'success')
+        : null;
       this.filter();
     });
   }
@@ -195,21 +201,24 @@ export class TableTasksComponent implements OnInit {
     this.toastMessage = '';
   }
 
-  showToast(message: string) {
+  showToast(message: string, type: ToastType) {
     this.toastMessage = message;
     this.toastShow = true;
+    this.toastType = type;
   }
 
   remove(task: ITask) {
+    if (task.id !== typeof String) {
+      this.showToast('Pagamento com tipo [id] diferente de string', 'error');
+      return;
+    }
+
     this.taskService.delete(task).subscribe({
-      next: (task) => {
-        console.log(task);
-      },
       error: (error) => {
-        console.log(error);
+        this.showToast('Erro desconhecido ao remover pagamento', 'error');
       },
       complete: () => {
-        this.showToast('Pagamento removido com sucesso!');
+        this.showToast('Pagamento removido com sucesso!', 'success');
         this.filter();
       },
     });

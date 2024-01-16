@@ -1,4 +1,4 @@
-<app-toast [show]="toastShow" [message]="toastMessage" (onHide)="hideToast()"></app-toast>
+<app-toast [show]="toastShow" [type]="toastType" [message]="toastMessage" (onHide)="hideToast()"></app-toast>
 
 <app-confirm-modal dataTestId="confirmation-modal" title="você quer mesmo excluir esse pagamento?"
     message="ao clicar em confirmar, o pagamento será excluído." [show]="showConfirmModal"

@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { TaskService } from 'src/app/services/task.service';
+import { ToastType } from '../../toast/toast.component';
 
 @Component({
   selector: 'app-table-tasks-edit',
@@ -16,9 +17,10 @@ import { TaskService } from 'src/app/services/task.service';
 export class TableTasksEditComponent implements OnInit {
   data: any = {};
   editForm: FormGroup = new FormGroup({});
-
+  toastMessage = '';
+  showToast = false;
   formatedValue: string = '';
-
+  toastType: ToastType = 'success';
   constructor(
     private fb: FormBuilder,
     private taskService: TaskService,
@@ -81,10 +83,30 @@ export class TableTasksEditComponent implements OnInit {
     this.editForm.controls['date'].setValue(new Date(dateISO).toISOString());
   }
 
+  handleToast(message: string, type: ToastType) {
+    this.showToast = true;
+    this.toastMessage = message;
+    this.toastType = type;
+  }
+
+  hideToast() {
+    this.showToast = false;
+    this.toastMessage = '';
+    this.toastType = 'success';
+  }
+
   saveTask() {
+    if (this.editForm.controls['id'].value !== typeof String) {
+      this.handleToast('pagamento com tipo [id] diferente de string', 'error');
+      return;
+    }
+
     this.convertValueToFloat();
     this.convertDateToISO();
     this.taskService.edit(this.editForm.value).subscribe({
+      error: () => {
+        this.handleToast('Erro ao editar tarefa', 'error');
+      },
       complete: () => {
         this.bsModalRef.hide();
       },

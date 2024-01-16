@@ -16,14 +16,15 @@
 
 </svg>
 
-<div *ngIf="show"
-    [ngClass]="{'show':show, 'hide':hide, 'success':success, 'danger':danger, 'warning':warning, 'info': info}"
-    class="alert alert-primary d-flex align-items-center" role="alert">
+<div *ngIf="show" [ngClass]="{'show':show, 'hide':hide,
+     'success':type === 'success', 'danger':type === 'error',
+      'warning':type === 'warning', 'info': type === 'info'}" class="alert alert-primary d-flex align-items-center"
+    role="alert">
     <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Info:">
-        <use *ngIf="success" xlink:href="#info-fill" />
-        <use *ngIf="warning" xlink:href="#exclamation-triangle-fill" />
-        <use *ngIf="info" xlink:href="#check-circle-fill" />
-        <use *ngIf="danger" xlink:href="#exclamation-triangle-fill" />
+        <use *ngIf="type === 'info'" xlink:href="#info-fill" />
+        <use *ngIf="type === 'warning'" xlink:href="#exclamation-triangle-fill" />
+        <use *ngIf="type === 'success'" xlink:href="#check-circle-fill" />
+        <use *ngIf="type === 'error'" xlink:href="#exclamation-triangle-fill" />
     </svg>
     <div>
         {{message}}
