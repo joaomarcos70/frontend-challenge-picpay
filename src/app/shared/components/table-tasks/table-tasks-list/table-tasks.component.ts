@@ -35,7 +35,7 @@ export class TableTasksComponent implements OnInit {
 
   filterForm: FormGroup = new FormGroup({
     name: new FormControl(''),
-    isPayed: new FormControl(null),
+    isPayed: new FormControl(''),
   });
 
   isLoading = true;

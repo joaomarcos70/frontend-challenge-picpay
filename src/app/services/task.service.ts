@@ -19,7 +19,10 @@ export class TaskService {
   ): Observable<IResponseTask> {
     let params = new HttpParams();
     params = params.append('name', filters.name);
-    params = params.append('isPayed', filters.isPayed ? filters.isPayed : '');
+    params = params.append(
+      'isPayed',
+      String(filters.isPayed) !== '' ? filters.isPayed : ''
+    );
     params = params.append(
       '_sort',
       `${sort.orderByDecCre && sort.sortBy !== '' ? '' : '-'}${sort.sortBy}`
