@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { NavigationStateService } from 'src/app/states/navigation-state.service';
 
 @Component({
@@ -9,11 +10,25 @@ import { NavigationStateService } from 'src/app/states/navigation-state.service'
 export class NavbarComponent {
   isLoading = false;
   showNavBar = false;
-  constructor(private navigationStateService: NavigationStateService) {}
+  openSettings = false;
+
+  constructor(
+    private navigationStateService: NavigationStateService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.navigationStateService.state().subscribe((show) => {
       this.showNavBar = show;
     });
+  }
+
+  handleOpenSettings() {
+    this.openSettings = !this.openSettings;
+  }
+
+  logout() {
+    this.authService.logout();
+    this.openSettings = false;
   }
 }

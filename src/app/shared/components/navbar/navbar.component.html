@@ -7,8 +7,14 @@
             <li><a href="home">início</a></li>
         </ul>
 
-        <div [ngClass]="{'avatar-loading':isLoading, 'avatar': !isLoading}">
+        <div [ngClass]="{'avatar-loading':isLoading, 'avatar': !isLoading}" (click)="handleOpenSettings()">
             <img src="https://robohash.org/quasetqui.png?size=150x150&set=set1" alt="">
         </div>
     </div>
 </nav>
+
+<div *ngIf="openSettings" class="settings">
+    <div (click)="logout()" class="content">
+        sair
+    </div>
+</div>

@@ -34,4 +34,9 @@ export class AuthService {
         },
       });
   }
+
+  logout() {
+    localStorage.removeItem('loggedUser');
+    this.router.navigate(['/login']);
+  }
 }
