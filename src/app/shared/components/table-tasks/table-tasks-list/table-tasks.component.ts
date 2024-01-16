@@ -10,11 +10,11 @@ import {
 import { TaskService } from 'src/app/services/task.service';
 import { ITask, ITaskSort } from '../interfaces/task.interface';
 
+import { DatePipe } from '@angular/common';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { TableTasksEditComponent } from '../table-tasks-edit/table-tasks-edit.component';
-import { TableTasksCreateComponent } from '../table-tasks-create/table-tasks-create.component';
 import { ConfirmModalComponent } from '../../modals/confirm-modal/confirm-modal.component';
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { TableTasksCreateComponent } from '../table-tasks-create/table-tasks-create.component';
+import { TableTasksEditComponent } from '../table-tasks-edit/table-tasks-edit.component';
 
 @Component({
   selector: 'app-table-tasks',
@@ -56,7 +56,6 @@ export class TableTasksComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private modalService: BsModalService,
-    private currencyPipe: CurrencyPipe,
     private datePipe: DatePipe
   ) {}
 
@@ -73,9 +72,6 @@ export class TableTasksComponent implements OnInit {
           this.tasks = tasks.data;
           this.total = tasks.items;
           this.totalPages = tasks.pages;
-        },
-        error: (error) => {
-          console.log(error);
         },
         complete: () => {
           this.isLoading = false;
@@ -103,7 +99,6 @@ export class TableTasksComponent implements OnInit {
           this.total = tasks.items;
           this.totalPages = tasks.pages;
         },
-        error: (error) => console.log(error),
         complete: () => (this.isLoading = false),
       });
   }

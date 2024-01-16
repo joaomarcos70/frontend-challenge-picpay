@@ -19,6 +19,7 @@ export class ConfirmModalComponent {
   @Input() confirmButtonTxt: string = 'confirmar';
   @Input() cancelButtonTxt: string = 'cancelar';
   @Input() task: ITask = {} as ITask;
+  @Input() dataTestId: string = '';
 
   @Output() confirm: EventEmitter<ITask> = new EventEmitter<ITask>();
   @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>();

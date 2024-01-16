@@ -1,4 +1,4 @@
-<div class="container-modal" (click)="onBackgroundClick()" *ngIf="show">
+<div class="container-modal" [attr.data-testid]="dataTestId" (click)="onBackgroundClick()" *ngIf="show">
     <div class="modal">
         <div class="title">
             <h3>{{title}}</h3>

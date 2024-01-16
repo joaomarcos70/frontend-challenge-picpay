@@ -35,6 +35,7 @@ export class MainInputComponent implements ControlValueAccessor {
   @Input() date = false;
   @Input() showError = false;
   @Input() errorMessage = '';
+  @Input() dataTestId = '';
 
   @Output() keyUp = new EventEmitter<KeyboardEvent>();
 

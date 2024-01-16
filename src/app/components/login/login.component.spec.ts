@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { NavigationStateService } from 'src/app/states/navigation-state.service';
+import { FormBuilder } from '@angular/forms';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -19,10 +19,10 @@ describe('LoginComponent', () => {
   };
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [ReactiveFormsModule, AuthService, NavigationStateService],
       providers: [
+        FormBuilder,
         { provide: AuthService, useValue: authServiceStub },
         { provide: NavigationStateService, useValue: navigationServiceStub },
       ],
@@ -40,52 +40,22 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  /*   it('should initialize the login form', () => {
-    expect(component.loginForm).toBeDefined();
-    expect(component.loginForm.get('username')).toBeDefined();
-    expect(component.loginForm.get('password')).toBeDefined();
-  });
+  it('should be login when submit button is clicked', () => {
+    const spyLogin = jest.spyOn(component, 'login');
 
-  it('should have required validators for username and password fields', () => {
-    const usernameControl = component.loginForm.get('username');
-    const passwordControl = component.loginForm.get('password');
+    component.loginForm.controls['username'].setValue('teste@teste.com');
+    component.loginForm.controls['password'].setValue('teste123');
+    fixture.detectChanges();
 
-    usernameControl.setValue('');
-    passwordControl.setValue('');
-
-    expect(usernameControl.hasError('required')).toBe(true);
-    expect(passwordControl.hasError('required')).toBe(true);
-  });
-
-  it('should have email validator for username field', () => {
-    const usernameControl = component.loginForm.get('username');
-
-    usernameControl.setValue('invalid-email');
-
-    expect(usernameControl.hasError('email')).toBe(true);
-  });
-
-  it('should have minimum length validator for password field', () => {
-    const passwordControl = component.loginForm.get('password');
-
-    passwordControl.setValue('12345');
-
-    expect(passwordControl.hasError('minlength')).toBe(true);
-  });
-
-  it('should call authService.login when login is called', () => {
-    spyOn(component.authService, 'login');
-
-    component.loginForm.setValue({
-      username: 'test@example.com',
-      password: 'password123',
-    });
-
-    component.login();
-
-    expect(component.authService.login).toHaveBeenCalledWith(
-      'test@example.com',
-      'password123'
+    const buttonSubmit = fixture.debugElement.nativeElement.querySelector(
+      '[data-testid="button-submit"]'
     );
-  }); */
+
+    buttonSubmit.click();
+    fixture.detectChanges();
+
+    expect(buttonSubmit).toBeTruthy();
+    expect(spyLogin).toHaveBeenCalled();
+    expect(spyLogin).toHaveBeenCalledTimes(1);
+  });
 });

@@ -1,6 +1,6 @@
 <app-toast [show]="toastShow" [message]="toastMessage" (onHide)="hideToast()"></app-toast>
 
-<app-confirm-modal title="você quer mesmo excluir esse pagamento?"
+<app-confirm-modal dataTestId="confirmation-modal" title="você quer mesmo excluir esse pagamento?"
     message="ao clicar em confirmar, o pagamento será excluído." [show]="showConfirmModal"
     (cancel)="closeConfirmModal()" (confirm)="remove($event)"></app-confirm-modal>
 
@@ -13,7 +13,7 @@
         </div>
         <div class="col-md-6">
             <div class="button-container">
-                <button class="primary-button" (click)="add()">adicionar</button>
+                <button [attr.data-testid]="'add-btn-task'" class="primary-button" (click)="add()">adicionar</button>
             </div>
         </div>
     </div>
@@ -21,7 +21,8 @@
     <form [formGroup]="filterForm">
         <div class="row mt-6">
             <div class="col-md-4">
-                <app-main-input (keyup)="search($event)" formControlName="name" placeholder="buscar pelo nome">
+                <app-main-input data-testid="search-input" (keyup)="search($event)" formControlName="name"
+                    placeholder="buscar pelo nome">
                 </app-main-input>
             </div>
             <div class="col-md-8">
@@ -87,14 +88,15 @@
                     </span>
                 </td>
                 <td>
-                    <span class="touched-area" (click)="edit(task)">
+                    <button [attr.data-testid]='"button-edit-"+i' class="touched-area" (click)="edit(task)">
                         <i class="bi bi-pencil"></i>
-                    </span>
+                    </button>
                 </td>
                 <td>
-                    <span class="touched-area" (click)="openConfirmModal(task)">
+                    <button [attr.data-testid]='"button-delete-"+i' class="touched-area"
+                        (click)="openConfirmModal(task)">
                         <i class="bi bi-trash3"></i>
-                    </span>
+                    </button>
                 </td>
             </tr>
         </tbody>
