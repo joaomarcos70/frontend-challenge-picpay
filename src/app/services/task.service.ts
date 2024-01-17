@@ -50,11 +50,8 @@ export class TaskService {
       })
       .pipe(
         map((res: HttpResponse<ITask[]>) => {
-          console.log(res);
           const totalItems = res.headers.get('X-Total-Count');
           const totalPages = Math.ceil(Number(totalItems) / pageSize);
-          const links = res.headers.get('Link');
-          console.log(links);
           const data = res.body;
 
           const response: IResponseTask = {
