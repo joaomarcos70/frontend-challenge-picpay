@@ -219,7 +219,7 @@ export class TableTasksComponent implements OnInit {
 
   remove(task: ITask) {
     this.taskService.delete(task).subscribe({
-      error: (error) => {
+      error: () => {
         this.showToast('Erro desconhecido ao remover pagamento', 'error');
       },
       complete: () => {

@@ -207,7 +207,7 @@ describe('TableTasksComponent', () => {
 
   it('should set toastShow to true and toastMessage to the provided message on showToast', () => {
     const message = 'Test message';
-    component.showToast(message);
+    component.showToast(message, 'success');
     expect(component.toastShow).toBe(true);
     expect(component.toastMessage).toBe(message);
   });
