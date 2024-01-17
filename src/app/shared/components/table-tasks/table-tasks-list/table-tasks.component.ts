@@ -35,7 +35,7 @@ export class TableTasksComponent implements OnInit {
 
   filterForm: FormGroup = new FormGroup({
     name: new FormControl(''),
-    isPayed: new FormControl(''),
+    isPayed: new FormControl(null),
   });
 
   isLoading = true;
@@ -48,7 +48,7 @@ export class TableTasksComponent implements OnInit {
 
   sort: ITaskSort = {
     sortBy: '',
-    orderByDecCre: false,
+    orderBy: 'asc',
   };
 
   showConfirmModal: boolean = false;
@@ -179,11 +179,12 @@ export class TableTasksComponent implements OnInit {
 
   handleFilter(filter: string) {
     this.sort.sortBy = filter;
-    this.sort.orderByDecCre = !this.sort.orderByDecCre;
+    this.sort.orderBy = this.sort.orderBy === 'asc' ? 'desc' : 'asc';
     this.filter();
   }
 
   filterGroup() {
+    console.log(typeof this.filterForm.controls['isPayed'].value);
     this.filter();
   }
 
@@ -208,11 +209,6 @@ export class TableTasksComponent implements OnInit {
   }
 
   remove(task: ITask) {
-    if (task.id !== typeof String) {
-      this.showToast('Pagamento com tipo [id] diferente de string', 'error');
-      return;
-    }
-
     this.taskService.delete(task).subscribe({
       error: (error) => {
         this.showToast('Erro desconhecido ao remover pagamento', 'error');

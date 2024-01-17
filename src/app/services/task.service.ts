@@ -1,11 +1,11 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   IResponseTask,
   ITask,
   ITaskSort,
 } from '../shared/components/table-tasks/interfaces/task.interface';
-import { Observable, filter } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
@@ -18,20 +18,42 @@ export class TaskService {
     pageSize: number
   ): Observable<IResponseTask> {
     let params = new HttpParams();
-    params = params.append('name', filters.name);
-    params = params.append(
-      'isPayed',
-      String(filters.isPayed) !== '' ? filters.isPayed : ''
-    );
-    params = params.append(
-      '_sort',
-      `${sort.orderByDecCre && sort.sortBy !== '' ? '' : '-'}${sort.sortBy}`
-    );
-    params = params.append('_page', page);
-    params = params.append('_per_page', pageSize);
-    return this.http.get<IResponseTask>(`http://localhost:3030/tasks`, {
-      params,
-    });
+    params = params.append('name_like', filters.name);
+    if (filters.isPayed === null) {
+      params = params.append('isPayed', true);
+      params = params.append('isPayed', false);
+    }
+    params = params.append('isPayed', filters.isPayed);
+    params = params.append('_sort', sort.sortBy);
+    params = params.append('_order', sort.orderBy);
+    params = params.append('_page', page.toString());
+    params = params.append('_limit', pageSize.toString());
+    return this.http
+      .get<ITask[]>(`http://localhost:3030/tasks`, {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((res: HttpResponse<ITask[]>) => {
+          console.log(res);
+          const totalItems = res.headers.get('X-Total-Count');
+          const totalPages = Math.ceil(Number(totalItems) / pageSize);
+          const links = res.headers.get('Link');
+          console.log(links);
+          const data = res.body;
+
+          const response: IResponseTask = {
+            first: 1,
+            prev: page - 1,
+            next: page + 1,
+            last: totalPages,
+            pages: totalPages,
+            items: Number(totalItems),
+            data: data as ITask[],
+          };
+          return response;
+        })
+      );
   }
 
   edit(task: ITask) {
