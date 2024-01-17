@@ -1,5 +1,5 @@
 export interface ITask {
-  id: string;
+  id: number;
   name: string;
   username: string;
   title: string;
@@ -9,9 +9,18 @@ export interface ITask {
   isPayed: boolean;
 }
 
+export type IOrderBY = 'asc' | 'desc';
+
 export interface ITaskSort {
   sortBy: string;
-  orderByDecCre: boolean;
+  orderBy: IOrderBY;
+}
+
+export interface ITaskPaginate {
+  _page: number;
+  _limit: number;
+  _start: number;
+  _end: number;
 }
 
 export interface IResponseTask {

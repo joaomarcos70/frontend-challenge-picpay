@@ -96,11 +96,6 @@ export class TableTasksEditComponent implements OnInit {
   }
 
   saveTask() {
-    if (this.editForm.controls['id'].value !== typeof String) {
-      this.handleToast('pagamento com tipo [id] diferente de string', 'error');
-      return;
-    }
-
     this.convertValueToFloat();
     this.convertDateToISO();
     this.taskService.edit(this.editForm.value).subscribe({

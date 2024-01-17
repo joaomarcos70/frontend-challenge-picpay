@@ -80,4 +80,39 @@ describe('TableTasksEditComponent', () => {
 
     expect(spy).toHaveBeenCalled();
   });
+
+  it('should convert the value to float', () => {
+    component.editForm.controls['value'].setValue('R$ 1.000,00');
+    component.convertValueToFloat();
+
+    expect(component.editForm.controls['value'].value).toEqual(1000);
+  });
+
+  it('should convert the date to ISO format', () => {
+    component.editForm.controls['date'].setValue('01/01/2021');
+    component.convertDateToISO();
+
+    expect(component.editForm.controls['date'].value).toEqual(
+      '2021-01-01T00:00:00.000Z'
+    );
+  });
+
+  it('should handle toast message', () => {
+    const message = 'Test message';
+    const type = 'success';
+
+    component.handleToast(message, type);
+
+    expect(component.showToast).toBe(true);
+    expect(component.toastMessage).toEqual(message);
+    expect(component.toastType).toEqual(type);
+  });
+
+  it('should hide toast message', () => {
+    component.hideToast();
+
+    expect(component.showToast).toBe(false);
+    expect(component.toastMessage).toEqual('');
+    expect(component.toastType).toEqual('success');
+  });
 });

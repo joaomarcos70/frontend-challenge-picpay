@@ -17,10 +17,6 @@ export type ToastType = 'success' | 'error' | 'warning' | 'info';
 export class ToastComponent implements OnInit {
   @Input() show: boolean = false;
   @Input() hide: boolean = false;
-  /*   @Input() success: boolean = true;
-  @Input() warning: boolean = false;
-  @Input() danger: boolean = false;
-  @Input() info: boolean = false; */
   @Input() type: ToastType = 'success';
   @Input() message: string = '';
 
