@@ -35,6 +35,19 @@
                             <option value="false">em aberto</option>
                         </select>
                     </div>
+                    <div class="col-md-5">
+                        <div class="date-range-container d-flex align-items-center">
+                            <mat-date-range-input [rangePicker]="picker">
+                                <input (dateChange)="filterGroup()" matStartDate formControlName="startDate"
+                                    placeholder="início">
+                                <input (dateChange)="filterGroup()" matEndDate formControlName="endDate"
+                                    placeholder="fim">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 

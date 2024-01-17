@@ -17,6 +17,14 @@ import { TableTasksCreateComponent } from '../table-tasks-create/table-tasks-cre
 import { TableTasksEditComponent } from '../table-tasks-edit/table-tasks-edit.component';
 import { ToastType } from '../../toast/toast.component';
 
+export interface IFilters {
+  name: string;
+  isPayed: boolean;
+  startDate: Date;
+  endDate: Date;
+  startValue: string;
+  endValue: string;
+}
 @Component({
   selector: 'app-table-tasks',
   templateUrl: './table-tasks.component.html',
@@ -36,6 +44,8 @@ export class TableTasksComponent implements OnInit {
   filterForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     isPayed: new FormControl(null),
+    startDate: new FormControl(null),
+    endDate: new FormControl(null),
   });
 
   isLoading = true;
@@ -184,7 +194,6 @@ export class TableTasksComponent implements OnInit {
   }
 
   filterGroup() {
-    console.log(typeof this.filterForm.controls['isPayed'].value);
     this.filter();
   }
 

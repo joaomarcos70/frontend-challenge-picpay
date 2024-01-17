@@ -1706,7 +1706,7 @@
       "title": "teste123",
       "date": "2023-12-09T00:00:00.000Z",
       "value": 10,
-      "isPayed": "false"
+      "isPayed": false
     },
     {
       "id": "f406",
@@ -1714,7 +1714,7 @@
       "title": "etetetet",
       "date": "2020-12-05T00:00:00.000Z",
       "value": 23212.02,
-      "isPayed": "false"
+      "isPayed": false
     },
     {
       "id": "3ffb",
@@ -1722,15 +1722,31 @@
       "title": "TESTE",
       "date": "2312-12-11T00:00:00.000Z",
       "value": 123123.12,
-      "isPayed": "false"
+      "isPayed": false
     },
     {
       "name": "teste2000",
       "title": "teste",
       "date": "2020-02-10T00:00:00.000Z",
       "value": 1000,
-      "isPayed": "true",
+      "isPayed": true,
       "id": "P3No2VS"
+    },
+    {
+      "name": "Teste versão 0.14",
+      "title": "teste",
+      "date": "2020-10-12T00:00:00.000Z",
+      "value": 133,
+      "isPayed": false,
+      "id": "P_79lka"
+    },
+    {
+      "name": "Teste Novo",
+      "title": "teste",
+      "date": "2024-12-12T00:00:00.000Z",
+      "value": 23,
+      "isPayed": true,
+      "id": "hnhB2Zf"
     }
   ],
   "account": [

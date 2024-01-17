@@ -8,31 +8,12 @@ import { Router } from '@angular/router';
 export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(username: string, password: string) {
-    this.http
-      .get<IUser[]>(`http://localhost:3030/account`)
-      .pipe(
-        map((users) => from(users)),
-        mergeAll(),
-        find((user) => user.email === username && user.password === password)
-      )
-      .subscribe({
-        next: (user) => {
-          if (user) {
-            localStorage.setItem(
-              'loggedUser',
-              JSON.stringify({ email: user.email, name: user.name })
-            );
-            this.router.navigate(['/home']);
-          } else {
-            alert('User not found');
-          }
-        },
-
-        error: () => {
-          alert('Error');
-        },
-      });
+  login(username: string, password: string): Observable<any> {
+    return this.http.get<IUser[]>(`http://localhost:3030/account`).pipe(
+      map((users) => from(users)),
+      mergeAll(),
+      find((user) => user.email === username && user.password === password)
+    );
   }
 
   logout() {

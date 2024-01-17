@@ -24,8 +24,8 @@
             <label for="">status</label>
             <select formControlName="isPayed" class="form-select form-select-lg mb-3"
                 aria-label="seletor de status pagamento">
-                <option value="true">pago</option>
-                <option value="false">em aberto</option>
+                <option [ngValue]="true">pago</option>
+                <option [ngValue]="false">em aberto</option>
             </select>
         </div>
     </form>

@@ -109,6 +109,7 @@ input {
   color: $dark-color;
   background-color: transparent;
   appearance: none;
+  background-color: $main-bg-color;
   cursor: pointer;
 
   &:focus {
@@ -134,8 +135,23 @@ input {
   background-color: transparent !important;
 }
 
+.mat-date-range-input-wrapper{
+  min-width:40px;
+}
+
 .mat-mdc-paginator-container {
   justify-content: space-between !important;
+}
+
+.mat-calendar-body-selected {
+  background-color: $primary-color !important;
+}
+mat-datepicker-toggle-default-icon .ng-star-inserted{
+  fill: darken($primary-color, 10%) !important;
+}
+
+.mat-calendar-body-in-range::before{
+  background-color: transparentize($primary-color, 0.8) !important;
 }
 
 ::-webkit-scrollbar {

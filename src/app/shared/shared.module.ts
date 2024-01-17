@@ -15,6 +15,9 @@ import { TableTasksEditComponent } from './components/table-tasks/table-tasks-ed
 import { TableTasksComponent } from './components/table-tasks/table-tasks-list/table-tasks.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { MatPaginatorIntlPtBr } from './utils/paginator-intl.util.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 @NgModule({
   declarations: [
     MainInputComponent,
@@ -32,6 +35,8 @@ import { MatPaginatorIntlPtBr } from './utils/paginator-intl.util.service';
     MatPaginatorModule,
     NgxMaskDirective,
     NgxMaskPipe,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   exports: [
     MainInputComponent,
@@ -41,6 +46,8 @@ import { MatPaginatorIntlPtBr } from './utils/paginator-intl.util.service';
     TableTasksCreateComponent,
     ConfirmModalComponent,
     ToastComponent,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: MatPaginatorIntlPtBr },

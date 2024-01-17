@@ -6,13 +6,14 @@ import {
   ITaskSort,
 } from '../shared/components/table-tasks/interfaces/task.interface';
 import { Observable, filter, map } from 'rxjs';
+import { IFilters } from '../shared/components/table-tasks/table-tasks-list/table-tasks.component';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
   constructor(private http: HttpClient) {}
 
   getTasks(
-    filters: ITask,
+    filters: IFilters,
     sort: ITaskSort,
     page: number,
     pageSize: number
@@ -23,6 +24,20 @@ export class TaskService {
       params = params.append('isPayed', true);
       params = params.append('isPayed', false);
     }
+    if (filters.startDate) {
+      params = params.append(
+        'date_gte',
+        new Date(filters.startDate).toISOString()
+      );
+    }
+
+    if (filters.endDate) {
+      params = params.append(
+        'date_lte',
+        new Date(filters.endDate).toISOString()
+      );
+    }
+
     params = params.append('isPayed', filters.isPayed);
     params = params.append('_sort', sort.sortBy);
     params = params.append('_order', sort.orderBy);
